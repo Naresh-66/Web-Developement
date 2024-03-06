@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<title>EbBill</title>
+<h3>Electricity Bill:</h3>
+<table border="1" width="100%">
+    <tr>
+        <td>
+            Consumer ID:
+        </td>
+        <td>
+            <input type="number" id="nbrcid" placeholder="0" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Previous Month Reading:
+        </td>
+        <td>
+            <input type="number" id="nbrpr" placeholder="0" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Current Month Reading:
+        </td>
+        <td>
+            <input type="number" id="nbrcr" placeholder="0" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Consumer Category:
+        </td>
+        <td>
+            <!--<select> tag develop combo box GUI component-->
+            <select id="cbxCC"> 
+                <option value="Agriculture">Agriculture</option>
+                <option value="Domestic">Domestic</option>
+                <option value="Commercial">Commercial</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Net Reading:</td>
+        <td><input type="number" id="nbrnr" placeholder="0" readonly="readonly" />    </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <table width="100%">
+                <thead>
+                    <th> Units (From - To)</th>
+                    <th>Consume Units</th>
+                    <th> Per Unit Amount</th>
+                    <th> Consume Units Amount</th>
+                </thead>
+
+                <tr>
+                    <td align="center">000 - 100</td>
+                    <td><input type="text" id="tbxcuu100" readonly="readonly" title="Consume Units Upto 100" /></td>
+                    <td><input type="text" id="tbxpuau100" readonly="readonly" title="Per Unit Amount Upto 100" /></td>
+                    <td><input type="text" id="tbxcuau100" readonly="readonly" title="Consume Units Amount Upto 100" /></td>
+                </tr>
+                <tr>
+                    <td align="center">101-200</td>
+                    <td><input type="text" id="tbxcuu200" readonly="readonly" title="Consume Units Upto 200" /></td>
+                    <td><input type="text" id="tbxpuau200" readonly="readonly" title="Per Unit Amount Upto 200" /></td>
+                    <td><input type="text" id="tbxcuau200" readonly="readonly" title="Consume Units Amount Upto 200" /></td>
+                </tr>
+                <tr>
+                    <td align="center">201-400</td>
+                    <td><input type="text" id="tbxcuu400" readonly="readonly" title="Consume Units Upto 400"/></td>
+                    <td><input type="text" id="tbxpuau400" readonly="readonly" title="Per Unit Amount Upto 400" /></td>
+                    <td><input type="text" id="tbxcuau400" readonly="readonly" title="Consume Units Amount Upto 400"/></td>
+                </tr>
+                <tr>
+                    <td align="center">401-.....</td>
+                    <td><input type="text" id="tbxcua400" readonly="readonly" title="Consume Units Above 400"/></td>
+                    <td><input type="text" id="tbxpuaa400" readonly="readonly" title="Per Unit Amount Above 400"/></td>
+                    <td><input type="text" id="tbxcuaa400" readonly="readonly" title="Consume Units Amount Above 400"/></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tax(%)
+        </td>
+        <td>
+            <input type="text" id="tbxtip" title="Tax in Percentage" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tax(Rs.)
+        </td>
+        <td>
+            <input type="text" id="tbxtia" title="Tax in Amount"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Meter Charge
+        </td>
+        <td>
+            <input type="text" id="tbxmc" readonly="readonly/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Net Pay
+        </td>
+        <td>
+            <input type="text" id="tbxnpay" readonly="readonly" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Net Pay
+        </td>
+        <td>
+            <input type="text" id="tbxnpay" readonly="readonly" />
+        </td>
+    </tr>
+    <tr>
+        <td style="color:red">
+            Remark
+        </td>
+        <td>
+            <input type="text" id="tbxrm"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" value="Cancel" onclick="location.href = 'WPEbbill.html';" />
+        </td>
+        <td>
+            <input type="button" value="Find" onclick="btnFind_onclick();" />
+        </td>
+    </tr>
+
+</table>
+
+<script>
+    function uToInteger(x) {
+        x = parseInt(x);
+        x = isNaN(x) ? 0 : x;
+        return x;
+    }
+
+    function uToFloat(x) {
+        x = parseFloat(x);
+        x = isNaN(x) ? 0 : x;
+        return x;
+    }
+    function btnFind_onclick() {
+        //consumer id value 
+        //store to variable(cid) from GUI component object(tbxcid)
+        var cid = nbrcid.value;
+        cid = uToInteger(cid);
+
+        //previous month reading value 
+        //store to variable(pmr) from GUI component object(tbxpmr)
+        var pr = nbrpr.value;
+        pr = uToFloat(pr);
+
+        //current month readling value 
+        //store to variable(cmr) from GUI component object(tbxcmr)
+        var cr = nbrcr.value;
+        cr = uToFloat(cr);
+
+        //find net reading value
+        var nr = cr - pr;
+
+        //validate net reading value, it is greater than or eqaul to zero
+
+        if (nr < 0 || cr < pr) {
+            //display error message via box
+            alert("Invalid consume reading...");
+
+            //reload a webpage
+            location.href = "WPEbbill.html";
+
+            //'return' jump statement terminate a function
+            return;
+        }
+        else {
+           tbxrm.value = null;
+        }
+
+
+        //store net reading value
+        //from variable (nr) to GUI component (number) object(nbrnr)
+        nbrnr.value = nr;
+
+        var puau100=0, puau200=0, puau400=0, puaa400=0;
+        //per unit amount upto 100,200,400
+        //per unit amount above 400
+
+        var cuu100=0, cuu200=0, cuu400=0, cua400=0;
+        //consume units amount upto 100,200,400
+        //consume units above 400
+
+        var cuau00 = 0, cuau200 = 0, cuau400 = 0, cuaa400 = 0;
+
+        var tip=0, tia=0, mc=0, npay=0;
+        //tax in percentage, tax in amount, meter charge, net pay
+
+        //store consume category value
+        //from GUI component(select combo box) to variable
+        var cc = cbxCC.value;
+
+        
+
+        if (cc == "Agriculture") {
+            puau100 = 0.25;
+            puau200 = 0.50;
+            puau400 = 1.00;
+            puaa400 = 2.00;
+
+            mc = 25;
+            tip = 2.5;
+
+        } else if (cc == "Domestic") {
+            puau100 = 1.00;
+            puau200 = 2.00;
+            puau400 = 4.00;
+            puaa400 = 8.00;
+
+            mc = 50;
+            tip = 5.0;
+
+        } else if (cc == "Commercial") {
+            puau100 = 2.00;
+            puau200 = 4.00;
+            puau400 = 6.00;
+            puaa400 = 12.00;
+
+            mc = 200; //meter charge
+            tip = 7.5; //tax in percentage
+        }
+        //ner reading above 400
+        if (nr > 400) {
+            cuu100 = 100;
+            cuu200 = 100;
+            cuu400 = 200;
+            cua400 = nr - 400;
+
+            //net reading above 200
+        } else if (nr > 200) {
+            cuu100 = 100;
+            cuu200 = 100;
+            cuu400 = nr - 200;
+            cua400 = 0;
+
+            //net reading above 100
+        } else if (nr > 100) {
+            cuu100 = 100;
+            cuu200 = nr - 100;
+            cuu400 = 0;
+            cua400 = 0;
+
+
+        }
+        //net rreading above 0
+        else {
+            cuu100 = nr;
+            cuu200 = 0;
+            cuu400 = 0;
+            cua400 = 0;
+        }
+        //consume units amount upto 100=per unit amount upto 100* consume units upto100
+        cuau100 = puau100 * cuu100;
+        cuau200 = puau200 * cuu200;
+        cuau400 = puau400 * cuu400;
+        cuaa400 = puaa400 * cua400;
+        //consume units amount above 400= per unit amount above 400*consume units above 400
+
+        if (cuaa400 > 0) {
+            tia = cuaa400 * tip / 100;
+            //tax in amount =consume units amount above 400* tax in percentage/100
+        }
+
+
+        //find net pay sum of cuau100, cuau200, cuau400, cuaa400, tia and mc
+        npay = cuau100 + cuau200 + cuau400 + cuaa400 + tia + mc;
+
+        tbxcuu100.value = cuu100;
+        tbxcuu200.value = cuu200;
+        tbxcuu400.value = cuu400;        
+        tbxcua400.value = cua400;
+
+        tbxpuau100.value = puau100;
+        tbxpuau200.value = puau200;
+        tbxpuau400.value = puau400;
+        tbxpuaa400.value = puaa400;
+
+        tbxcuau100.value = cuau100;
+        tbxcuau200.value = cuau200;
+        tbxcuau400.value = cuau400;
+        tbxcuaa400.value = cuaa400;
+
+        tbxtip.value = tip;
+        tbxtia.value = tia;
+        tbxmc.value = mc;
+        tbxnpay.value = npay;
+    }
+</script>
