@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Electricity Bill</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Electricity Bill Calculator</h2>
+        <table>
+            <tr>
+                <td>Consumer ID:</td>
+                <td><input type="number" id="nbrcid" placeholder="0"></td>
+            </tr>
+            <tr>
+                <td>Previous Month Reading:</td>
+                <td><input type="number" id="nbrpr" placeholder="0"></td>
+            </tr>
+            <tr>
+                <td>Current Month Reading:</td>
+                <td><input type="number" id="nbrcr" placeholder="0"></td>
+            </tr>
+            <tr>
+                <td>Consumer Category:</td>
+                <td>
+                    <select id="cbxCC">
+                        <option value="Agriculture">Agriculture</option>
+                        <option value="Domestic">Domestic</option>
+                        <option value="Commercial">Commercial</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Net Reading:</td>
+                <td><input type="number" id="nbrnr" placeholder="0" readonly></td>
+            </tr>
+        </table>
+
+        <h3>Consumption Details</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Units (From - To)</th>
+                    <th>Consume Units</th>
+                    <th>Per Unit Rate (₹)</th>
+                    <th>Amount (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>000 - 100</td>
+                    <td><input id="tbxcuu100" readonly></td>
+                    <td><input id="tbxpuau100" readonly></td>
+                    <td><input id="tbxcuau100" readonly></td>
+                </tr>
+                <tr>
+                    <td>101 - 200</td>
+                    <td><input id="tbxcuu200" readonly></td>
+                    <td><input id="tbxpuau200" readonly></td>
+                    <td><input id="tbxcuau200" readonly></td>
+                </tr>
+                <tr>
+                    <td>201 - 400</td>
+                    <td><input id="tbxcuu400" readonly></td>
+                    <td><input id="tbxpuau400" readonly></td>
+                    <td><input id="tbxcuau400" readonly></td>
+                </tr>
+                <tr>
+                    <td>401 & above</td>
+                    <td><input id="tbxcua400" readonly></td>
+                    <td><input id="tbxpuaa400" readonly></td>
+                    <td><input id="tbxcuaa400" readonly></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <tr>
+                <td>Tax (%)</td>
+                <td><input id="tbxtip" readonly></td>
+            </tr>
+            <tr>
+                <td>Tax (₹)</td>
+                <td><input id="tbxtia" readonly></td>
+            </tr>
+            <tr>
+                <td>Meter Charge (₹)</td>
+                <td><input id="tbxmc" readonly></td>
+            </tr>
+            <tr>
+                <td>Net Payable (₹)</td>
+                <td><input id="tbxnpay" readonly></td>
+            </tr>
+            <tr>
+                <td>Remark</td>
+                <td><input type="text" id="tbxrm" readonly></td>
+            </tr>
+        </table>
+
+        <div class="buttons">
+            <button onclick="location.reload()">Cancel</button>
+            <button onclick="btnFind_onclick()">Find</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
